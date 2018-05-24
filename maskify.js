@@ -17,6 +17,8 @@ const maskify = (cc) => {
   return maskedStr.join('')
 }
 
-console.log(maskify('4556364607935616'));
-console.log(maskify('1'));
-console.log(maskify('11111'));
+console.log(maskify('4556364607935616'))
+console.log(maskify('1'))
+console.log(maskify('11111'))
+console.log(maskify('1234'))
+
