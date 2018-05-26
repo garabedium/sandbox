@@ -29,5 +29,7 @@
 
 
 youtube_ids = generate_ids(10,5)
-
 puts youtube_ids
+
+# characters = [('a'..'z'),('A'..'Z'),('0'..'9')].map(&:to_a).flatten.push('_','-')
+# puts characters.inspect
