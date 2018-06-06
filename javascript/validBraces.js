@@ -5,36 +5,33 @@
 // What is considered Valid?
 // A string of braces is considered valid if all braces are matched with the correct brace.
 
-// Cases:
-// "(){}[]"   =>  True
-// "([{}])"   =>  True
-// "(}"       =>  False
-// "[(])"     =>  False
-// "[({})](]" =>  False
-
-
 const validBraces = (string) => {
-  const braces = string
-  const openBraces = { "(":"(","[":"[","{":"{" }
-  const closedBraces = { ")":"(","]":"[","}":"{" }
+  const braces = {
+    "open": { "(":"(","[":"[","{":"{" },
+    "closed": { ")":"(","]":"[","}":"{" }
+  }
   let stack = []
 
-  for (let i = 0; i < braces.length; i++) {
-    let brace = braces[i]
+  for (let i = 0; i < string.length; i++) {
+    let brace = string[i]
 
-    // If open brace, push it to the stack
-    if (openBraces[brace]){
+    if (braces.open[brace] || braces.closed[brace] !== stack[stack.length - 1]){
       stack.push(brace)
-    // If closing brace matches last brace in the stack, pop it off the stack
-    } else if ( closedBraces[brace] === stack[stack.length - 1] ) {
-      stack.pop()
-    // Else, there are additional closing braces
     } else {
-      stack.push(brace)
+      stack.pop()
     }
-
   }
   return (stack.length === 0) ? true : false
 }
 
-console.log(validBraces("[]"))
+let tests = [
+  "(){}[]",   //=>  True
+  "([{}])",   //=>  True
+  "(}",       //=>  False
+  "[(])",     //=>  False
+  "[({})](]" //=>  False
+]
+
+tests.forEach( (test) => {
+  console.log(validBraces(test))
+})
