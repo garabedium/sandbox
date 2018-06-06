@@ -6,22 +6,20 @@
 // A string of braces is considered valid if all braces are matched with the correct brace.
 
 const validBraces = (string) => {
-  const braces = {
-    "open": { "(":"(","[":"[","{":"{" },
-    "closed": { ")":"(","]":"[","}":"{" }
-  }
+  const braces = { "(":")","[":"]","{":"}" }
   let stack = []
+  let brace = ''
 
   for (let i = 0; i < string.length; i++) {
-    let brace = string[i]
+    brace = string[i]
 
-    if (braces.open[brace] || braces.closed[brace] !== stack[stack.length - 1]){
+    if ( braces[brace] ){
       stack.push(brace)
-    } else {
-      stack.pop()
+    } else if ( brace !== braces[stack.pop()] ){
+      return false
     }
   }
-  return (stack.length === 0) ? true : false
+  return true
 }
 
 let tests = [
