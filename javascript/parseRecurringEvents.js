@@ -20,8 +20,13 @@ const parseEventDays = (str) => {
       "FR":"Fridays",
       "SA":"Saturdays"
   }
-
   const dayRecurrences = str.split('=')[2].split(',')
+
+  let output = dayRecurrences.map( (day) => {
+      return days[day]
+  })
+
+  return output.join(', ').trim()
 
 }
 
