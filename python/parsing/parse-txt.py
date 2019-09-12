@@ -1,9 +1,13 @@
 import pdb
 import json
+import time
 
-words = []
+start_time = time.clock()
 
-# Read txt file and select all 6 letter words
+words = {}
+# pdb.set_trace()
+
+# Read txt file and select all 6 letter words:
 with open('common-words-sample.txt') as fp:
   line = fp.readline()
   word_length = 6
@@ -11,9 +15,13 @@ with open('common-words-sample.txt') as fp:
   for line in fp:
     line = line.strip().split('\t')
     word = line[0]
-    if len(word) == word_length:
-      item = { "word": word, "frequency": int(line[1]) }
-      words.append(item)
+    frequency = int(line[1])
+    # Filter words by:
+    filter_length = len(word) == word_length
+    filter_unique = word not in words
+
+    if filter_length and filter_unique:
+      words[word] = frequency
     count += 1
 
 # Write words array to JSON file
@@ -21,3 +29,4 @@ with open('sample-words-parsed.json','w') as fp:
   json.dump(words,fp)
 
 print(len(words))
+print time.clock() - start_time, "seconds"
