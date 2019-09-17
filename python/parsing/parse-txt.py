@@ -5,7 +5,6 @@ import time
 start_time = time.clock()
 
 words = {}
-# pdb.set_trace()
 
 # Read txt file and select all 6 letter words:
 with open('common-words-sample.txt') as fp:
